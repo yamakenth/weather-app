@@ -9,7 +9,9 @@ async function getWeather(city) {
     if (json.cod === '400') {
       throw new Error('City not found!');
     }
-    console.log(parseJSON(json));
+    const data = parseJSON(json);
+    renderDisplay(data);
+    console.log(data);
   } catch(err) {
     console.log(err);
   }
@@ -29,7 +31,6 @@ function parseJSON(obj) {
     weaterIcon: obj.weather[0].icon,
     windSpeed: obj.wind.speed
   }
-
   return picked;
 }
 
@@ -38,8 +39,23 @@ getWeather(DEFAULT_CITY);
 const locationSubmissionForm = document.querySelector('.location-submission-container');
 locationSubmissionForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
   const city = document.querySelector('.location-submission').value;
   getWeather(city);
-
 });
+
+// display 
+function renderDisplay(data) {
+  const locationName = document.querySelector('.location-name-title');
+  locationName.textContent = `${data.city}, ${data.country}`
+
+  const temp = document.querySelector('.temp-title');
+  temp.textContent = `${data.temp}˚`
+
+  const conditionDetail = document.querySelector('.details > .condition');
+  conditionDetail.textContent = data.weatherDescription;
+  const highDetail = document.querySelector('.details > .high');
+  highDetail.textContent = `H: ${data.tempMax}˚`;
+  const lowDetail = document.querySelector('.details > .low');
+  lowDetail.textContent = `L: ${data.tempMin}˚`;
+
+}
