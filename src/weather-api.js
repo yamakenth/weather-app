@@ -29,14 +29,49 @@ async function getForecast(coord) {
   }
 }
 
+// parse raw data to extract only requried fields 
+// take in currentWeather and forecast data
+// return new obj of objs
+function parseJSON(currentWeather, forecast) {
+  const current = {
+    feels_like: currentWeather.main.feels_like,
+    humidity: currentWeather.main.humidity,
+    pressure: currentWeather.main.pressure,
+    temp: currentWeather.main.temp,
+    tempMax: currentWeather.main.temp_max,
+    tempMin: currentWeather.main.temp_min,
+    weatherDescription: currentWeather.weather[0].description,
+    weatherIcon: currentWeather.weather[0].icon,
+    windSpeed: currentWeather.wind.speed
+  }
+  
+  const daily = [];
+  forecast.daily.forEach(day => {
+    const dayObj = {
+      dt: day.dt,
+      temp: day.temp.day,
+      weatherDescription: day.weather[0].description,
+      weatherIcon: day.weather[0].icon
+    }
+    daily.push(dayObj);
+  });
+  
+  return {
+    city: currentWeather.name,
+    country: currentWeather.sys.country,
+    current,
+    daily
+  };
+}
+
 // get weather from city name input 
 // take in city name 
 // return data
 async function getWeather(cityName) {
   const currentWeather = await getCurrentWeather(cityName);
   const forecast = await getForecast(currentWeather.coord);
-
-  return forecast;
+  const weather = parseJSON(currentWeather, forecast);
+  return weather;
 }
 
 export { getWeather };
