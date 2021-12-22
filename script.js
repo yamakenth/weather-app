@@ -6,6 +6,9 @@ async function getWeather(city) {
   try {
     const response = await fetch(url, { mode: 'cors' });
     const json = await response.json();
+    if (json.cod === '400') {
+      throw new Error('City not found!');
+    }
     console.log(parseJSON(json));
   } catch(err) {
     console.log(err);
