@@ -1,6 +1,6 @@
-const apiKey = '1ea5dd769f80aec18e48a9cb93379a09';
+const API_KEY = '1ea5dd769f80aec18e48a9cb93379a09';
 let city = 'London';
-const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
 
 async function getWeather() {
   try {
@@ -31,3 +31,8 @@ function parseJSON(obj) {
 }
 
 getWeather();
+
+const locationSubmissionForm = document.querySelector('.location-submission-container');
+locationSubmissionForm.addEventListener('submit', () => {
+  console.log('submit');
+});
