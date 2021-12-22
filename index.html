@@ -9,13 +9,23 @@
   <script src="./script.js" defer></script>
 </head>
 <body>
-
-  <div class="location-submission-container">
-    <form class="location-submission-form">
-      <input type="text" class="location-submission">
-      <button type="submit">Search</button>
-    </form>
+  <!-- header -->
+  <div class="header">
+    <div class="location-submission-container">
+      <form class="location-submission-form">
+        <input type="text" class="location-submission" placeholder="Search city">
+        <button type="submit">
+          <img src="./magnifying-glasses.png">
+        </button>
+      </form>
+      <p class="error-message"></p>
+    </div>
+    <div class="temp-toggle">
+      <button type="button" id='f'>˚F</button>/<button type="button" id="c">˚C</button>
+    </div>
   </div>
+
+
 
 </body>
 </html>
