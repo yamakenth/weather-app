@@ -6,14 +6,12 @@ async function getWeather() {
   try {
     const response = await fetch(url, { mode: 'cors' });
     const json = await response.json();
-    // console.log(parseJSON(json));
-    console.log(json);
+    console.log(parseJSON(json));
   } catch(err) {
     console.log(err);
   }
 }
 
-/*
 function parseJSON(obj) {
   const picked = {
     city: obj.name,
@@ -31,6 +29,5 @@ function parseJSON(obj) {
 
   return picked;
 }
-*/
 
 getWeather();
