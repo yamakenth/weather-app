@@ -231,4 +231,12 @@ function createForecast(data) {
   }
 }
 
-export { createHeader, createTodaysView, createForecast };
+// clear display 
+// take in no parameters 
+// return no results 
+function clearDisplay() {
+  document.querySelector('.todays-view').remove();
+  document.querySelector('.forecast').remove();
+}
+
+export { createHeader, createTodaysView, createForecast, clearDisplay };

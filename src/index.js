@@ -1,4 +1,4 @@
-import { createForecast, createHeader, createTodaysView } from './ui-element';
+import { clearDisplay, createForecast, createHeader, createTodaysView } from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
 
@@ -9,12 +9,9 @@ const DEFAULT_CITY = 'London';
 createHeader();
 // get data for london on page load 
 getWeather(DEFAULT_CITY).then(data => {
-  console.log(data);
   createTodaysView(data);
   createForecast(data);
 });
-
-
 
 // eventListener on location input 
 const locationInput = document.querySelector('.location-input-form');
@@ -22,7 +19,11 @@ locationInput.addEventListener('submit', (e) => {
   e.preventDefault();
   const inputField = document.querySelector('.location-input');
   const city = inputField.value;
-  getWeather(city).then(data => console.log(data));
+  getWeather(city).then(data => {
+    clearDisplay();
+    createTodaysView(data);
+    createForecast(data);
+  });
   inputField.value = '';
   inputField.focus();
 });
