@@ -43,6 +43,7 @@ function createHeader() {
     input.type = 'text';
     input.classList.add('location-input');
     input.placeholder = 'Search city';
+    input.autofocus = true;
     // >> button 
     const button = document.createElement('button');
     button.type = 'submit';

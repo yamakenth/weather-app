@@ -15,7 +15,4 @@ locationInput.addEventListener('submit', (e) => {
   getWeather(city).then(data => console.log(data));
   inputField.value = '';
   inputField.focus();
-})
-
-
-
+});
