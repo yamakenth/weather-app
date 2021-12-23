@@ -27,7 +27,7 @@ function createHeader() {
     // >> erorr message 
     const errorMsg = document.createElement('p');
     errorMsg.classList.add('error-message');
-    errorMsg.textContent = 'Your city was not found. Please try again.'
+    errorMsg.textContent = '';
     // append child to parent 
     container.appendChild(form);
     container.appendChild(errorMsg);
