@@ -101,3 +101,21 @@ button:hover {
 .temp-toggle-container > p {
   color: #ffffff71;
 }
+
+.todays-view {
+  background-color: #0000003a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 6px 20px 20px;
+}
+
+.location-name-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

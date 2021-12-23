@@ -82,4 +82,48 @@ function createHeader() {
   }
 }
 
-export { createHeader };
+// craete todays view display 
+// take in data 
+// return no results 
+function createTodaysView(data) {
+  // > todays view 
+  const todaysView = document.createElement('div');
+  todaysView.classList.add('todays-view');
+  // >> location name 
+  const locationName = createLocationNameContainer();
+  // >> temperature 
+  const currentTemp = createCurrentTemp();
+  // >> description 
+  // >> facts 
+  // append child to parent 
+  todaysView.appendChild(locationName);
+  todaysView.appendChild(currentTemp);
+  body.appendChild(todaysView);
+
+  // location name div 
+  function createLocationNameContainer() {
+    // > container 
+    const container = document.createElement('div');
+    container.classList.add('location-name-container');
+    // >> icon 
+    const icon = document.createElement('img');
+    icon.src = `http://openweathermap.org/img/wn/${data.current.weatherIcon}@2x.png`
+    // >> name 
+    const name = document.createElement('h1');
+    name.textContent = `${data.city}, ${data.country}`;
+    // append child to parent 
+    container.appendChild(icon);
+    container.appendChild(name);
+    return container;
+  }
+
+  // current temp 
+  function createCurrentTemp() {
+    // > h1
+    const temp = document.createElement('h1');
+    temp.textContent = `${data.current.temp}˚`;
+    return temp;
+  }
+}
+
+export { createHeader, createTodaysView };

@@ -1,15 +1,15 @@
-import { createHeader } from './ui-element';
+import { createHeader, createTodaysView } from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
 
 // class constant 
 const DEFAULT_CITY = 'London';
 
-// get data for london on page load 
-getWeather(DEFAULT_CITY).then(data => console.log(data));
-
 // create header section 
 createHeader();
+// get data for london on page load 
+getWeather(DEFAULT_CITY).then(data => createTodaysView(data));
+
 
 
 // eventListener on location input 
