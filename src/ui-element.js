@@ -94,10 +94,12 @@ function createTodaysView(data) {
   // >> temperature 
   const currentTemp = createCurrentTemp();
   // >> description 
+  const description = createDescription();
   // >> facts 
   // append child to parent 
   todaysView.appendChild(locationName);
   todaysView.appendChild(currentTemp);
+  todaysView.appendChild(description);
   body.appendChild(todaysView);
 
   // location name div 
@@ -121,8 +123,33 @@ function createTodaysView(data) {
   function createCurrentTemp() {
     // > h1
     const temp = document.createElement('h1');
+    temp.classList.add('current-temp');
     temp.textContent = `${data.current.temp}˚`;
     return temp;
+  }
+
+  // description
+  function createDescription() {
+    // > container 
+    const container = document.createElement('div');
+    container.classList.add('description-container');
+    // >> desc 
+    const desc = document.createElement('h3');
+    desc.classList.add('weather-description');
+    desc.textContent = data.current.weatherDescription;
+    // >> high
+    const high = document.createElement('h3');
+    high.classList.add('max-temp');
+    high.textContent = `H: ${data.current.tempMax}˚`;
+    // >> low 
+    const low = document.createElement('h3');
+    low.classList.add('low-temp');
+    low.textContent = `L: ${data.current.tempMin}˚`;
+    // append child to parent 
+    container.appendChild(desc);
+    container.appendChild(high);
+    container.appendChild(low);
+    return container;
   }
 }
 

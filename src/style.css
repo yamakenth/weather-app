@@ -119,3 +119,14 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
+.current-temp {
+  margin-bottom: 12px;
+}
+
+.description-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
