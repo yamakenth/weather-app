@@ -1,4 +1,4 @@
-import { createHeader, createTodaysView } from './ui-element';
+import { createForecast, createHeader, createTodaysView } from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
 
@@ -10,7 +10,8 @@ createHeader();
 // get data for london on page load 
 getWeather(DEFAULT_CITY).then(data => {
   console.log(data);
-  createTodaysView(data)
+  createTodaysView(data);
+  createForecast(data);
 });
 
 

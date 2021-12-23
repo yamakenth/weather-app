@@ -1,3 +1,4 @@
+import { kebabCase } from 'lodash';
 import SearchIcon from './img/magnifying-glasses.png';
 
 const body = document.querySelector('body');
@@ -82,7 +83,7 @@ function createHeader() {
   }
 }
 
-// craete todays view display 
+// create todays view display 
 // take in data 
 // return no results 
 function createTodaysView(data) {
@@ -111,7 +112,7 @@ function createTodaysView(data) {
     container.classList.add('location-name-container');
     // >> icon 
     const icon = document.createElement('img');
-    icon.src = `http://openweathermap.org/img/wn/${data.current.weatherIcon}@2x.png`
+    icon.src = `http://openweathermap.org/img/wn/${data.current.weatherIcon}@2x.png`;
     // >> name 
     const name = document.createElement('h1');
     name.textContent = `${data.city}, ${data.country}`;
@@ -190,4 +191,44 @@ function createTodaysView(data) {
   }
 }
 
-export { createHeader, createTodaysView };
+// create forecast section 
+// take in data 
+// return no results 
+function createForecast(data) {
+  // > container 
+  const container = document.createElement('div');
+  container.classList.add('forecast');
+  createAndAppendDailyForecast();
+  // append child to parent 
+  body.appendChild(container);
+
+  // create daily forecast 
+  function createAndAppendDailyForecast() {
+    for (let i = 1; i < data.daily.length; i++) {
+      const day = data.daily[i];
+      // >> daily forecast 
+      const dailyForecast = document.createElement('div');
+      dailyForecast.classList.add('daily-forecast');
+      // >>> date 
+      const date = document.createElement('h3');
+      date.textContent = day.dt;
+      // >>> weather icon 
+      const weatherIcon = document.createElement('img');
+      weatherIcon.src = `http://openweathermap.org/img/wn/${day.weatherIcon}@2x.png`;
+      // >>> temp 
+      const temp = document.createElement('h3');
+      temp.textContent = `${day.temp}˚`;
+      // >>> weather description
+      const weatherDesc = document.createElement('h3');
+      weatherDesc.textContent = day.weatherDescription;
+      // append child to parent  
+      dailyForecast.appendChild(date);
+      dailyForecast.appendChild(weatherIcon);
+      dailyForecast.appendChild(temp);
+      dailyForecast.appendChild(weatherDesc);
+      container.appendChild(dailyForecast);
+    }
+  }
+}
+
+export { createHeader, createTodaysView, createForecast };
