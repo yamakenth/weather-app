@@ -36,7 +36,7 @@ function createHeader() {
 
   function createForm() {
     // > form 
-    const form = document.createElement('div');
+    const form = document.createElement('form');
     form.classList.add('location-input-form');
     // >> iput 
     const input = document.createElement('input');

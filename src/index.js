@@ -2,6 +2,20 @@ import { createHeader } from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
 
-getWeather('London').then(data => console.log(data));
 
+// create header section 
 createHeader();
+
+// eventListener on location input 
+const locationInput = document.querySelector('.location-input-form');
+locationInput.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const inputField = document.querySelector('.location-input');
+  const city = inputField.value;
+  getWeather(city).then(data => console.log(data));
+  inputField.value = '';
+  inputField.focus();
+})
+
+
+
