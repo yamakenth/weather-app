@@ -94,12 +94,14 @@ function createTodaysView(data) {
   // >> temperature 
   const currentTemp = createCurrentTemp();
   // >> description 
-  const description = createDescription();
+  const description = createDescriptionContainer();
   // >> facts 
+  const facts = createFactsContainer();
   // append child to parent 
   todaysView.appendChild(locationName);
   todaysView.appendChild(currentTemp);
   todaysView.appendChild(description);
+  todaysView.appendChild(facts);
   body.appendChild(todaysView);
 
   // location name div 
@@ -129,7 +131,7 @@ function createTodaysView(data) {
   }
 
   // description
-  function createDescription() {
+  function createDescriptionContainer() {
     // > container 
     const container = document.createElement('div');
     container.classList.add('description-container');
@@ -149,6 +151,41 @@ function createTodaysView(data) {
     container.appendChild(desc);
     container.appendChild(high);
     container.appendChild(low);
+    return container;
+  }
+
+  // facts 
+  function createFactsContainer() {
+    // > container 
+    const container = document.createElement('div');
+    container.classList.add('facts-container');
+    // >> fact div
+    const feelsLike = createFactsDiv(`${data.current.feels_like}˚`, 'Feels Like');
+    const pressure = createFactsDiv(`${data.current.pressure}hPa`, 'Pressure');
+    const humidity = createFactsDiv(`${data.current.humidity}%`, 'Humidity');
+    const windSpeed = createFactsDiv(`${data.current.windSpeed}m/s`, 'Wind Speed');
+    // append child to parent 
+    container.appendChild(feelsLike);
+    container.appendChild(pressure);
+    container.appendChild(humidity);
+    container.appendChild(windSpeed);
+    return container;
+  }
+
+  // helper function to create facts div 
+  function createFactsDiv(dataFact, dataLabel) {
+    // > facts div 
+    const container = document.createElement('div');
+    container.classList.add('fact-section');
+    // >> fact
+    const fact = document.createElement('h3');
+    fact.textContent = dataFact;
+    // >> title 
+    const title = document.createElement('h3');
+    title.textContent = dataLabel;
+    // append child to parent 
+    container.appendChild(fact);
+    container.appendChild(title);
     return container;
   }
 }

@@ -121,7 +121,7 @@ button:hover {
 }
 
 .current-temp {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .description-container {
@@ -129,4 +129,20 @@ button:hover {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  margin-bottom: 20px;
+}
+
+.facts-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.fact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
 }
