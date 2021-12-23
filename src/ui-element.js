@@ -239,4 +239,19 @@ function clearDisplay() {
   document.querySelector('.forecast').remove();
 }
 
-export { createHeader, createTodaysView, createForecast, clearDisplay };
+// display error message 
+// take in no parameters
+// return no results 
+function showErrMsg() {
+  console.log('triggered');
+  const errMsg = document.querySelector('.error-message');
+  errMsg.textContent = 'Your city was not found. Please try again.';
+}
+
+export { 
+  createHeader, 
+  createTodaysView, 
+  createForecast, 
+  clearDisplay,
+  showErrMsg
+};
