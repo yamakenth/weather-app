@@ -76,9 +76,9 @@ function createHeader() {
     cButton.id = 'c-toggle';
     cButton.textContent = '˚C';
     // append child to parent 
-    container.appendChild(fButton);
-    container.appendChild(slash);
     container.appendChild(cButton);
+    container.appendChild(slash);
+    container.appendChild(fButton);
     return container
   }
 }
