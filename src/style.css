@@ -154,7 +154,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto 26px;
   background-color: #0000006e;
   border-radius: 20px;
   padding: 20px;
@@ -180,4 +180,10 @@ button:hover {
 
 .toggle-button.active {
   color: #fff;
+}
+
+.query-time {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
 }

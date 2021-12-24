@@ -246,6 +246,7 @@ function createForecast(data, tempUnit) {
 function clearDisplay() {
   document.querySelector('.todays-view').remove();
   document.querySelector('.forecast').remove();
+  document.querySelector('.query-time').remove();
 }
 
 // display/hide error message below input 
@@ -284,10 +285,21 @@ function toggleTempHighlight(toggle) {
   toggle.classList.add('active');
 }
 
+// create section to display query time 
+// take in query time in ms 
+// return no results 
+function createQueryTime(time) {
+  const p = document.createElement('p');
+  p.classList.add('query-time');
+  p.textContent = `The query took ${time}ms`
+  body.appendChild(p);
+}
+
 export { 
   createHeader, 
   createTodaysView, 
   createForecast, 
+  createQueryTime,
   clearDisplay,
   errMsgContol,
   toggleTempHighlight

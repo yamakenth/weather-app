@@ -2,6 +2,7 @@ import {
   clearDisplay, 
   createForecast, 
   createHeader, 
+  createQueryTime, 
   createTodaysView, 
   errMsgContol,
   toggleTempHighlight
@@ -13,16 +14,19 @@ import './style.css';
 const DEFAULT_CITY = 'London';
 const DEFAULT_TEMP_UNIT = 'c';
 
-// data of current city 
+// global data
 let currentCityData;
+let queryTime;
 
 // create header section 
 createHeader(DEFAULT_TEMP_UNIT);
 // get data for london on page load 
 getWeather(DEFAULT_CITY).then(data => {
-  currentCityData = data;
+  currentCityData = data.weather;
+  queryTime = data.apiCallTime;
   createTodaysView(currentCityData, DEFAULT_TEMP_UNIT);
   createForecast(currentCityData, DEFAULT_TEMP_UNIT);
+  createQueryTime(queryTime);
 });
 
 // querySelectors 
@@ -38,12 +42,14 @@ locationInput.addEventListener('submit', (e) => {
   getWeather(city)
     .then(data => {
       if (data !== undefined) {
-        currentCityData = data;
+        currentCityData = data.weather;
+        queryTime = data.apiCallTime;
         errMsgContol(0);
         clearDisplay();
         createTodaysView(currentCityData, currentTempUnit);
         createForecast(currentCityData, currentTempUnit);
         inputField.value = '';
+        createQueryTime(queryTime);
       } else {
         errMsgContol(1);
       }
@@ -61,5 +67,6 @@ tempToggles.forEach(toggle => {
     createTodaysView(currentCityData, newTempUnit);
     createForecast(currentCityData, newTempUnit);
     inputField.value = '';
+    createQueryTime(queryTime);
   });
 });
