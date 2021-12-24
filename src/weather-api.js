@@ -75,10 +75,13 @@ function parseJSON(currentWeather, forecast) {
 // return data
 async function getWeather(cityName) {
   try {
+    const submissionTime = new Date();
     const currentWeather = await getCurrentWeather(cityName);
     const forecast = await getForecast(currentWeather.coord);
+    const dataReturnTime = new Date();
+    const apiCallTime = dataReturnTime - submissionTime;
     const weather = parseJSON(currentWeather, forecast);
-    return weather;
+    return { weather, apiCallTime };
   } catch (err) {
     console.log(err);
   } 
