@@ -1,4 +1,4 @@
-import { kebabCase } from 'lodash';
+import { fromUnixTime, format } from 'date-fns';
 import SearchIcon from './img/magnifying-glasses.png';
 
 const body = document.querySelector('body');
@@ -211,7 +211,8 @@ function createForecast(data) {
       dailyForecast.classList.add('daily-forecast');
       // >>> date 
       const date = document.createElement('h3');
-      date.textContent = day.dt;
+      const dayOfWeek = format(fromUnixTime(day.dt), 'iii');
+      date.textContent = dayOfWeek;
       // >>> weather icon 
       const weatherIcon = document.createElement('img');
       weatherIcon.src = `http://openweathermap.org/img/wn/${day.weatherIcon}@2x.png`;
