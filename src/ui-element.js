@@ -304,6 +304,18 @@ function createQueryTime(time) {
   body.appendChild(p);
 }
 
+// display/hide laoding message below input 
+// take in control (1/0)
+// return no results 
+function loadingMsgContol(control) {
+  const loadingMsg = document.querySelector('.loading-message');
+  if (control === 1) {
+    loadingMsg.classList.add('active');
+  } else if (control === 0) {
+    loadingMsg.classList.remove('active');
+  }
+}
+
 export { 
   createHeader, 
   createTodaysView, 
@@ -311,5 +323,6 @@ export {
   createQueryTime,
   clearDisplay,
   errMsgContol,
-  toggleTempHighlight
+  toggleTempHighlight,
+  loadingMsgContol
 };
