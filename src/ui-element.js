@@ -64,19 +64,24 @@ function createHeader() {
     // > container 
     const container = document.createElement('div');
     container.classList.add('temp-toggle-container');
-    // >> button
-    const fButton = document.createElement('button');
-    fButton.type = 'button';
-    fButton.id = 'f-toggle';
-    fButton.textContent = '˚F';
-    // >> p
-    const slash = document.createElement('p');
-    slash.textContent = '/';
     // >> button 
     const cButton = document.createElement('button');
     cButton.type = 'button';
-    cButton.id = 'c-toggle';
+    cButton.classList.add('toggle-button');
+    cButton.id = 'c';
+    cButton.value = 'c';
     cButton.textContent = '˚C';
+    cButton.classList.add('active');
+    // >> p
+    const slash = document.createElement('p');
+    slash.textContent = '/';
+    // >> button
+    const fButton = document.createElement('button');
+    fButton.type = 'button';
+    fButton.classList.add('toggle-button');
+    fButton.id = 'f';
+    fButton.value = 'f';
+    fButton.textContent = '˚F';
     // append child to parent 
     container.appendChild(cButton);
     container.appendChild(slash);
@@ -266,10 +271,23 @@ function convertTemp(k, unit) {
   }
 }
 
+// toggle active temp button 
+// take in id of html element 
+// return no result 
+function toggleTempHighlight(toggle) {
+  if (toggle.id === 'f') {
+    document.querySelector('#c').classList.remove('active');
+  } else {
+    document.querySelector('#f').classList.remove('active');
+  }
+  toggle.classList.add('active');
+}
+
 export { 
   createHeader, 
   createTodaysView, 
   createForecast, 
   clearDisplay,
-  errMsgContol
+  errMsgContol,
+  toggleTempHighlight
 };

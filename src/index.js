@@ -3,7 +3,8 @@ import {
   createForecast, 
   createHeader, 
   createTodaysView, 
-  errMsgContol
+  errMsgContol,
+  toggleTempHighlight
 } from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
@@ -39,4 +40,21 @@ locationInput.addEventListener('submit', (e) => {
       }
     });
   inputField.focus();
+});
+
+// eventListener to temp toggles
+const tempToggleContainer = document.querySelector('.temp-toggle-container');
+const tempToggles = document.querySelectorAll('.toggle-button')
+tempToggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    toggleTempHighlight(toggle);
+    
+    
+    
+
+    tempToggleContainer.dataset.displayTemp = toggle.value;
+    console.log(tempToggleContainer.dataset.displayTemp);
+
+
+  });
 });

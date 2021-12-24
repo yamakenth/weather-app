@@ -177,3 +177,7 @@ button:hover {
 .error-message.active {
   display: block;
 }
+
+.toggle-button.active {
+  color: #fff;
+}
