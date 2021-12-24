@@ -13,27 +13,36 @@ import './style.css';
 const DEFAULT_CITY = 'London';
 const DEFAULT_TEMP_UNIT = 'c';
 
+// data of current city 
+let currentCityData;
+
 // create header section 
-createHeader();
+createHeader(DEFAULT_TEMP_UNIT);
 // get data for london on page load 
 getWeather(DEFAULT_CITY).then(data => {
-  createTodaysView(data, DEFAULT_TEMP_UNIT);
-  createForecast(data, DEFAULT_TEMP_UNIT);
+  currentCityData = data;
+  createTodaysView(currentCityData, DEFAULT_TEMP_UNIT);
+  createForecast(currentCityData, DEFAULT_TEMP_UNIT);
 });
 
-// eventListener on location input 
+// querySelectors 
 const locationInput = document.querySelector('.location-input-form');
+const inputField = document.querySelector('.location-input');
+const tempToggles = document.querySelectorAll('.toggle-button')
+
+// eventListener on location input 
 locationInput.addEventListener('submit', (e) => {
   e.preventDefault();
-  const inputField = document.querySelector('.location-input');
   const city = inputField.value;
+  const currentTempUnit = document.querySelector('.toggle-button.active').value;
   getWeather(city)
     .then(data => {
       if (data !== undefined) {
+        currentCityData = data;
         errMsgContol(0);
         clearDisplay();
-        createTodaysView(data);
-        createForecast(data);
+        createTodaysView(currentCityData, currentTempUnit);
+        createForecast(currentCityData, currentTempUnit);
         inputField.value = '';
       } else {
         errMsgContol(1);
@@ -43,18 +52,14 @@ locationInput.addEventListener('submit', (e) => {
 });
 
 // eventListener to temp toggles
-const tempToggleContainer = document.querySelector('.temp-toggle-container');
-const tempToggles = document.querySelectorAll('.toggle-button')
 tempToggles.forEach(toggle => {
   toggle.addEventListener('click', () => {
+    errMsgContol(0);
     toggleTempHighlight(toggle);
-    
-    
-    
-
-    tempToggleContainer.dataset.displayTemp = toggle.value;
-    console.log(tempToggleContainer.dataset.displayTemp);
-
-
+    const newTempUnit = toggle.value;
+    clearDisplay();
+    createTodaysView(currentCityData, newTempUnit);
+    createForecast(currentCityData, newTempUnit);
+    inputField.value = '';
   });
 });

@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 // create header section 
 // take in no parameters 
 // return no results 
-function createHeader() {
+function createHeader(tempUnit) {
   // > header 
   const header = document.createElement('div');
   header.classList.add('header');
@@ -20,6 +20,8 @@ function createHeader() {
   header.appendChild(cityInput);
   header.appendChild(tempToggle);
   body.appendChild(header);
+  // highlight default temp unit 
+  document.querySelector(`#${tempUnit}`).classList.add('active');
 
   function createInputContainer() {
     // > container 
@@ -71,7 +73,6 @@ function createHeader() {
     cButton.id = 'c';
     cButton.value = 'c';
     cButton.textContent = '˚C';
-    cButton.classList.add('active');
     // >> p
     const slash = document.createElement('p');
     slash.textContent = '/';
