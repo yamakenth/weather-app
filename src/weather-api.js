@@ -8,8 +8,11 @@ async function getCurrentWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
   try {
     const response = await fetch(url, { mode: 'cors' });
-    const data = await response.json();
-    return data;
+    if (response.status === 200) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error(response.status);
   } catch(err) {
     console.log(err);
   }
@@ -22,8 +25,11 @@ async function getForecast(coord) {
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=minutely,hourly,alerts&appid=${API_KEY}`;
   try {
     const response = await fetch(url, { mode: 'cors' });
-    const data = await response.json();
-    return data;
+    if (response.status === 200) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error(response.status);
   } catch(err) {
     console.log(err);
   }
@@ -68,10 +74,14 @@ function parseJSON(currentWeather, forecast) {
 // take in city name 
 // return data
 async function getWeather(cityName) {
-  const currentWeather = await getCurrentWeather(cityName);
-  const forecast = await getForecast(currentWeather.coord);
-  const weather = parseJSON(currentWeather, forecast);
-  return weather;
+  try {
+    const currentWeather = await getCurrentWeather(cityName);
+    const forecast = await getForecast(currentWeather.coord);
+    const weather = parseJSON(currentWeather, forecast);
+    return weather;
+  } catch (err) {
+    console.log(err);
+  } 
 }
 
 export { getWeather };
