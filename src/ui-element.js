@@ -2,6 +2,7 @@ import { fromUnixTime, format } from 'date-fns';
 import { Kelvin } from 'node-temperature-converter';
 import SearchIcon from './img/magnifying-glasses.png';
 
+// html body element 
 const body = document.querySelector('body');
 
 // create header section 
@@ -87,7 +88,7 @@ function createHeader() {
 // create todays view display 
 // take in data 
 // return no results 
-function createTodaysView(data) {
+function createTodaysView(data, tempUnit) {
   // > todays view 
   const todaysView = document.createElement('div');
   todaysView.classList.add('todays-view');
@@ -128,7 +129,7 @@ function createTodaysView(data) {
     // > h1
     const temp = document.createElement('h1');
     temp.classList.add('current-temp');
-    temp.textContent = `${convertTemp(data.current.temp)}˚`;
+    temp.textContent = `${convertTemp(data.current.temp, tempUnit)}˚`;
     return temp;
   }
 
@@ -144,11 +145,11 @@ function createTodaysView(data) {
     // >> high
     const high = document.createElement('h3');
     high.classList.add('max-temp');
-    high.textContent = `H: ${convertTemp(data.current.tempMax)}˚`;
+    high.textContent = `H: ${convertTemp(data.current.tempMax, tempUnit)}˚`;
     // >> low 
     const low = document.createElement('h3');
     low.classList.add('low-temp');
-    low.textContent = `L: ${convertTemp(data.current.tempMin)}˚`;
+    low.textContent = `L: ${convertTemp(data.current.tempMin, tempUnit)}˚`;
     // append child to parent 
     container.appendChild(desc);
     container.appendChild(high);
@@ -162,7 +163,7 @@ function createTodaysView(data) {
     const container = document.createElement('div');
     container.classList.add('facts-container');
     // >> fact div
-    const feelsLike = createFactsDiv(`${convertTemp(data.current.feels_like)}˚`, 'Feels Like');
+    const feelsLike = createFactsDiv(`${convertTemp(data.current.feels_like, tempUnit)}˚`, 'Feels Like');
     const pressure = createFactsDiv(`${data.current.pressure}hPa`, 'Pressure');
     const humidity = createFactsDiv(`${data.current.humidity}%`, 'Humidity');
     const windSpeed = createFactsDiv(`${data.current.windSpeed}m/s`, 'Wind Speed');
@@ -195,7 +196,7 @@ function createTodaysView(data) {
 // create forecast section 
 // take in data 
 // return no results 
-function createForecast(data) {
+function createForecast(data, tempUnit) {
   // > container 
   const container = document.createElement('div');
   container.classList.add('forecast');
@@ -219,7 +220,7 @@ function createForecast(data) {
       weatherIcon.src = `http://openweathermap.org/img/wn/${day.weatherIcon}@2x.png`;
       // >>> temp 
       const temp = document.createElement('h3');
-      temp.textContent = `${convertTemp(day.temp)}˚`;
+      temp.textContent = `${convertTemp(day.temp, tempUnit)}˚`;
       // >>> weather description
       const weatherDesc = document.createElement('h3');
       weatherDesc.textContent = day.weatherDescription;
@@ -254,11 +255,15 @@ function errMsgContol(control) {
 }
 
 // convert temperature for display 
-// take in temp in Kelvin 
+// take in temp in Kelvin in unit to convert to
 // return converted temp 
-function convertTemp(k) {
+function convertTemp(k, unit) {
   const kelvin = new Kelvin(k);
-  return Math.round(kelvin.toCelsius());
+  if (unit === 'c') {
+    return Math.round(kelvin.toCelsius());
+  } else if (unit === 'f') {
+    return Math.round(kelvin.toFahrenheit());
+  }
 }
 
 export { 

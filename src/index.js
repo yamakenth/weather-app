@@ -10,13 +10,14 @@ import './style.css';
 
 // class constant 
 const DEFAULT_CITY = 'London';
+const DEFAULT_TEMP_UNIT = 'c';
 
 // create header section 
 createHeader();
 // get data for london on page load 
 getWeather(DEFAULT_CITY).then(data => {
-  createTodaysView(data);
-  createForecast(data);
+  createTodaysView(data, DEFAULT_TEMP_UNIT);
+  createForecast(data, DEFAULT_TEMP_UNIT);
 });
 
 // eventListener on location input 
