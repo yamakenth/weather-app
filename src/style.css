@@ -169,3 +169,11 @@ button:hover {
   align-items: center;
   min-width: 120px;
 }
+
+.error-message {
+  display: none;
+}
+
+.error-message.active {
+  display: block;
+}

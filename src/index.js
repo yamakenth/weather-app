@@ -1,4 +1,10 @@
-import { clearDisplay, createForecast, createHeader, createTodaysView } from './ui-element';
+import { 
+  clearDisplay, 
+  createForecast, 
+  createHeader, 
+  createTodaysView, 
+  errMsgContol
+} from './ui-element';
 import { getWeather } from './weather-api';
 import './style.css';
 
@@ -19,11 +25,17 @@ locationInput.addEventListener('submit', (e) => {
   e.preventDefault();
   const inputField = document.querySelector('.location-input');
   const city = inputField.value;
-  getWeather(city).then(data => {
-    clearDisplay();
-    createTodaysView(data);
-    createForecast(data);
-  });
-  inputField.value = '';
+  getWeather(city)
+    .then(data => {
+      if (data !== undefined) {
+        errMsgContol(0);
+        clearDisplay();
+        createTodaysView(data);
+        createForecast(data);
+        inputField.value = '';
+      } else {
+        errMsgContol(1);
+      }
+    });
   inputField.focus();
 });

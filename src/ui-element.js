@@ -28,7 +28,7 @@ function createHeader() {
     // >> erorr message 
     const errorMsg = document.createElement('p');
     errorMsg.classList.add('error-message');
-    errorMsg.textContent = '';
+    errorMsg.textContent = 'Your city was not found. Please try again.';
     // append child to parent 
     container.appendChild(form);
     container.appendChild(errorMsg);
@@ -240,13 +240,16 @@ function clearDisplay() {
   document.querySelector('.forecast').remove();
 }
 
-// display error message 
-// take in no parameters
+// display/hide error message below input 
+// take in control (1/0)
 // return no results 
-function showErrMsg() {
-  console.log('triggered');
+function errMsgContol(control) {
   const errMsg = document.querySelector('.error-message');
-  errMsg.textContent = 'Your city was not found. Please try again.';
+  if (control === 1) {
+    errMsg.classList.add('active');
+  } else if (control === 0) {
+    errMsg.classList.remove('active');
+  }
 }
 
 export { 
@@ -254,5 +257,5 @@ export {
   createTodaysView, 
   createForecast, 
   clearDisplay,
-  showErrMsg
+  errMsgContol
 };
