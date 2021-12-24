@@ -35,9 +35,14 @@ function createHeader(tempUnit) {
     const errorMsg = document.createElement('p');
     errorMsg.classList.add('error-message');
     errorMsg.textContent = 'Your city was not found. Please try again.';
+    // >> loading message 
+    const loadingMsg = document.createElement('p');
+    loadingMsg.classList.add('loading-message');
+    loadingMsg.textContent = 'Loading...';
     // append child to parent 
     container.appendChild(form);
     container.appendChild(errorMsg);
+    container.appendChild(loadingMsg);
     return container;
   }
 

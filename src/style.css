@@ -183,12 +183,22 @@ button:hover {
   min-width: 120px;
 }
 
-.error-message {
+.error-message,
+.loading-message {
   display: none;
 }
 
 .error-message.active {
   display: block;
+}
+
+.loading-message.active {
+  display: block;
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 
 .toggle-button.active {

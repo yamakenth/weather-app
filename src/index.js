@@ -21,11 +21,14 @@ let queryTime;
 // create header section 
 createHeader(DEFAULT_TEMP_UNIT);
 // get data for london on page load 
+const loading = document.querySelector('.loading-message');
+loading.classList.add('active');
 getWeather(DEFAULT_CITY).then(data => {
   currentCityData = data.weather;
   queryTime = data.apiCallTime;
   createTodaysView(currentCityData, DEFAULT_TEMP_UNIT);
   createForecast(currentCityData, DEFAULT_TEMP_UNIT);
+  loading.classList.remove('active');
   createQueryTime(queryTime);
 });
 
@@ -37,6 +40,8 @@ const tempToggles = document.querySelectorAll('.toggle-button')
 // eventListener on location input 
 locationInput.addEventListener('submit', (e) => {
   e.preventDefault();
+  loading.classList.add('active');
+  errMsgContol(0);
   const city = inputField.value;
   const currentTempUnit = document.querySelector('.toggle-button.active').value;
   getWeather(city)
@@ -44,13 +49,14 @@ locationInput.addEventListener('submit', (e) => {
       if (data !== undefined) {
         currentCityData = data.weather;
         queryTime = data.apiCallTime;
-        errMsgContol(0);
         clearDisplay();
         createTodaysView(currentCityData, currentTempUnit);
         createForecast(currentCityData, currentTempUnit);
         inputField.value = '';
+        loading.classList.remove('active');
         createQueryTime(queryTime);
       } else {
+        loading.classList.remove('active');
         errMsgContol(1);
       }
     });
