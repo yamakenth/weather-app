@@ -4,6 +4,8 @@ import SearchIcon from './img/magnifying-glasses.png';
 
 // html body element 
 const body = document.querySelector('body');
+const content = document.createElement('div');
+content.classList.add('content');
 
 // create header section 
 // take in no parameters 
@@ -111,7 +113,8 @@ function createTodaysView(data, tempUnit) {
   todaysView.appendChild(currentTemp);
   todaysView.appendChild(description);
   todaysView.appendChild(facts);
-  body.appendChild(todaysView);
+  content.appendChild(todaysView);
+  body.appendChild(content);
 
   // location name div 
   function createLocationNameContainer() {
@@ -208,7 +211,8 @@ function createForecast(data, tempUnit) {
   container.classList.add('forecast');
   createAndAppendDailyForecast();
   // append child to parent 
-  body.appendChild(container);
+  content.appendChild(container);
+  body.appendChild(content);
 
   // create daily forecast 
   function createAndAppendDailyForecast() {
