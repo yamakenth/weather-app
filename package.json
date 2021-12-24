@@ -27,6 +27,7 @@
     "webpack-dev-server": "^4.7.0"
   },
   "dependencies": {
-    "date-fns": "^2.27.0"
+    "date-fns": "^2.27.0",
+    "node-temperature-converter": "^1.0.2"
   }
 }

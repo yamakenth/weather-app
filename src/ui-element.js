@@ -1,4 +1,5 @@
 import { fromUnixTime, format } from 'date-fns';
+import { Kelvin } from 'node-temperature-converter';
 import SearchIcon from './img/magnifying-glasses.png';
 
 const body = document.querySelector('body');
@@ -127,7 +128,7 @@ function createTodaysView(data) {
     // > h1
     const temp = document.createElement('h1');
     temp.classList.add('current-temp');
-    temp.textContent = `${data.current.temp}˚`;
+    temp.textContent = `${convertTemp(data.current.temp)}˚`;
     return temp;
   }
 
@@ -143,11 +144,11 @@ function createTodaysView(data) {
     // >> high
     const high = document.createElement('h3');
     high.classList.add('max-temp');
-    high.textContent = `H: ${data.current.tempMax}˚`;
+    high.textContent = `H: ${convertTemp(data.current.tempMax)}˚`;
     // >> low 
     const low = document.createElement('h3');
     low.classList.add('low-temp');
-    low.textContent = `L: ${data.current.tempMin}˚`;
+    low.textContent = `L: ${convertTemp(data.current.tempMin)}˚`;
     // append child to parent 
     container.appendChild(desc);
     container.appendChild(high);
@@ -161,7 +162,7 @@ function createTodaysView(data) {
     const container = document.createElement('div');
     container.classList.add('facts-container');
     // >> fact div
-    const feelsLike = createFactsDiv(`${data.current.feels_like}˚`, 'Feels Like');
+    const feelsLike = createFactsDiv(`${convertTemp(data.current.feels_like)}˚`, 'Feels Like');
     const pressure = createFactsDiv(`${data.current.pressure}hPa`, 'Pressure');
     const humidity = createFactsDiv(`${data.current.humidity}%`, 'Humidity');
     const windSpeed = createFactsDiv(`${data.current.windSpeed}m/s`, 'Wind Speed');
@@ -218,7 +219,7 @@ function createForecast(data) {
       weatherIcon.src = `http://openweathermap.org/img/wn/${day.weatherIcon}@2x.png`;
       // >>> temp 
       const temp = document.createElement('h3');
-      temp.textContent = `${day.temp}˚`;
+      temp.textContent = `${convertTemp(day.temp)}˚`;
       // >>> weather description
       const weatherDesc = document.createElement('h3');
       weatherDesc.textContent = day.weatherDescription;
@@ -250,6 +251,14 @@ function errMsgContol(control) {
   } else if (control === 0) {
     errMsg.classList.remove('active');
   }
+}
+
+// convert temperature for display 
+// take in temp in Kelvin 
+// return converted temp 
+function convertTemp(k) {
+  const kelvin = new Kelvin(k);
+  return Math.round(kelvin.toCelsius());
 }
 
 export { 
